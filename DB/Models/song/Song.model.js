@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from "mongoose";
 const songSchema = new mongoose.Schema({
   title: {
     type: String,
