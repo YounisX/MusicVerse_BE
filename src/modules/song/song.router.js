@@ -20,7 +20,7 @@ router.post(
   auth(),
   cloudUpload().fields([
     { name: "audio", maxCount: 1 },
-    { name: "image", maxCount: 1 },
+    // { name: "image", maxCount: 1 },
   ]),
   songController.createSong
 );

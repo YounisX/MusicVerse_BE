@@ -2,21 +2,17 @@ import mongoose from "mongoose";
 const songSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
   },
   artist: {
     type: String,
-    required: true,
     ref:'Artist'
   },
   album: {
     type: String,
-    required: true,
     ref:'Album'
   },
   duration: {
     type: Number,
-    required: true,
   },
   genre: {
     type: String,
@@ -25,11 +21,10 @@ const songSchema = new mongoose.Schema({
     type: Date,
   },
   imageUrl: {
-    type: String,
+    type: Object,
   },
   audioUrl: {
-    type: String,
-    required: true,
+    type: Object,
   },
 });
 
