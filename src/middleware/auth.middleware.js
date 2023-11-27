@@ -27,7 +27,7 @@ const auth = (roles = []) => {
         return next(new Error("user doesn't exist", { cause: 401 }));
       }
       if (!roles.includes(user.rolesole) && user.role == decoded.role) {
-        return next(new Error("not authenticated user", { cause: 402 }));
+        return next(new Error("not authenticated user", { cause: 402 })); 
       }
       req.user = user; // Attach the user object to the request for further use
       return next();
