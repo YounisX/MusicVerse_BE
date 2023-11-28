@@ -6,21 +6,21 @@ import auth from "../../middleware/auth.middleware.js";
 import { upload } from "../../utils/multer.js";
 const router = Router();
 
-router.post(
-  "/upload-locally",
-  auth(),
-  upload.fields([
-    { name: "audio", maxCount: 1 },
-    { name: "image", maxCount: 1 },
-  ]),
-  songController.createSong
-);
+// router.post(
+//   "/upload-locally",
+//   auth(),
+//   upload.fields([
+//     { name: "audio", maxCount: 1 },
+//     { name: "image", maxCount: 1 },
+//   ]),
+//   songController.createSong
+// );
 router.post(
   "/upload",
   auth(),
   cloudUpload().fields([
     { name: "audio", maxCount: 1 },
-    // { name: "image", maxCount: 1 },
+    { name: "image", maxCount: 1 },
   ]),
   songController.createSong
 );
