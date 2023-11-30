@@ -25,6 +25,10 @@ router.post(
   songController.createSong
 );
 
+router.get('/songList',auth(),songController.getSong)
+
+router.get('/play/:songId',songController.streamSong)
+
 // router.get('/shit',songController.getShit);
 
 export default router;

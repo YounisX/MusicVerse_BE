@@ -30,7 +30,6 @@ const auth = (roles = []) => {
         return next(new Error("not authenticated user", { cause: 402 })); 
       }
       req.user = user; // Attach the user object to the request for further use
-  console.log(req.user);
       return next();
     };
  

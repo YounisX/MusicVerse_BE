@@ -26,6 +26,9 @@ const songSchema = new mongoose.Schema({
   audioUrl: {
     type: Object,
   },
+  size:{
+    type:Number
+  }
 });
 
 const Song = mongoose.model("Song", songSchema);
