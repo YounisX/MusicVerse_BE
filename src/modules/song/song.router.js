@@ -29,6 +29,8 @@ router.get('/songList',auth(),songController.getSong)
 
 router.get('/play/:songId',songController.streamSong)
 
+router.post('/like/:songId',auth(),songController.likeSong)
+router.post('/disLike/:songId',auth(),songController.disLike)
 // router.get('/shit',songController.getShit);
 
 export default router;

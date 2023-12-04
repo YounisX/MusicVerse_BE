@@ -79,3 +79,80 @@ console.log({song});
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+// export const likeSong = async(req,res,next)=>{
+//   try {
+//     const {songId} = req.params;
+//       const song = await Song.findByIdAndUpdate(
+//         songId,
+//         {
+//           $inc: { 'likeCount': 1 },
+//           $addToSet: { 'likes': req.user._id},
+//         },
+//         { new: true }
+//       );
+//       res.json(song);
+//     } catch (error) {
+//       res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// }
+
+export const likeSong = async (req, res, next) => {
+  try {
+    const { songId } = req.params;
+    const userId = req.user._id;
+
+    // Use findOneAndUpdate to atomically check and update
+    const song = await Song.findOneAndUpdate(
+      {
+        _id: songId,
+        'likes': { $ne: userId }, // Check if userId is not in the array
+      },
+      {
+        $inc: { 'likeCount': 1 },
+        $addToSet: { 'likes': userId },
+      },
+      { new: true }
+    );
+
+    if (!song) {
+      return res.status(400).json({ error: 'Song already liked by the user' });
+    }
+
+    res.json(song);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+export const disLike = async (req, res, next) => {
+  try {
+    const { songId } = req.params;
+    const userId = req.user._id;
+
+    // Use findOneAndUpdate to atomically check and update
+    const song = await Song.findOneAndUpdate(
+      {
+        _id: songId,
+        'likes': userId, // Check if userId is in the array
+      },
+      {
+        $inc: { 'likeCount': -1 },
+        $pull: { 'likes': userId },
+      },
+      { new: true }
+    );
+
+    if (!song) {
+      return res.status(400).json({ error: 'User has not liked the song' });
+    }
+
+    res.json(song);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+  

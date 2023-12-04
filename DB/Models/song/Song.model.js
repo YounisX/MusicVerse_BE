@@ -28,7 +28,18 @@ const songSchema = new mongoose.Schema({
   },
   size:{
     type:Number
+  },
+likeCount:{
+  type:Number,
+  default:0
+},
+likes:[
+  {
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User'
   }
+],
+
 });
 
 const Song = mongoose.model("Song", songSchema);
